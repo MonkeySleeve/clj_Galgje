@@ -1,10 +1,10 @@
-(ns tictactoe.test.testdata
+(ns galgje.test.testdata
   (:use clojure.set))
 
 (defn row-win-combinations [p]
   #{ [[p  p  p]
       [\- \- \-]
-      [\- \- \-]], 
+      [\- \- \-]],
      [[\- \- \-]
       [p  p  p]
       [\- \- \-]],
@@ -32,7 +32,7 @@
       [p  \- \-]],
     [[\- p  \-]
      [\- p  \-]
-     [\- p  \-]], 
+     [\- p  \-]],
     [[\- \- p ]
      [\- \- p ]
      [\- \- p ]] })

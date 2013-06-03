@@ -1,4 +1,4 @@
-(ns tictactoe.model
+(ns galgje.model
   (:require [noir.session :as session]))
 
 (def empty-board [[\- \- \-]
@@ -13,7 +13,7 @@
 (defn get-board []
   (:board (session/get :game-state)))
 
-(defn get-board-cell 
+(defn get-board-cell
   ([row col]
     (get-board-cell (get-board) row col))
   ([board row col]
@@ -22,9 +22,9 @@
 (defn get-player []
   (:player (session/get :game-state)))
 
-(defn other-player 
+(defn other-player
   ([] (other-player (get-player)))
-  ([player] (if (= player \X) \O \X))) 
+  ([player] (if (= player \X) \O \X)))
 
 (defn winner-in-rows? [board player]
   (boolean (some (fn [row] (every? (fn [c] (= c player)) row)) board)))
@@ -38,9 +38,9 @@
 (defn winner-in-diagonals? [board player]
   (let [diag-coords [[[0 0] [1 1] [2 2]]
                      [[0 2] [1 1] [2 0]]]]
-    (boolean (some (fn [coords] 
-                     (every? (fn [coord] 
-                               (= player (apply get-board-cell board coord))) 
+    (boolean (some (fn [coords]
+                     (every? (fn [coord]
+                               (= player (apply get-board-cell board coord)))
                              coords))
                    diag-coords))))
 
@@ -71,5 +71,5 @@ returns the character for the winning player, nil if there is no winner"
 
 (defn play! [row col]
   (session/swap! (fn [session-map]
-                   (assoc session-map :game-state 
+                   (assoc session-map :game-state
                           (new-state row col (:game-state session-map))))))

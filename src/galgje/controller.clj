@@ -1,8 +1,8 @@
-(ns tictactoe.controller
+(ns galgje.controller
   (:use compojure.core)
   (:require [compojure.core :as compojure]
-            [tictactoe.view :as view]
-            [tictactoe.model :as model]))
+            [galgje.view :as view]
+            [galgje.model :as model]))
 
 (defn start-page []
   (model/reset-game!)
@@ -19,6 +19,6 @@
         (view/draw-screen)
         (view/play-screen)))))
 
-(defroutes tictactoe-routes
+(defroutes galgje-routes
   (GET "/" [] (start-page))
   (POST "/" {button-pressed :params} (turn-page button-pressed)))

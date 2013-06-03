@@ -1,5 +1,5 @@
-(ns tictactoe.repl
-  (:use tictactoe.handler
+(ns galgje.repl
+  (:use galgje.handler
         ring.server.standalone
         [ring.middleware file-info file]))
 
@@ -22,7 +22,7 @@
   (let [port (if port (Integer/parseInt port) 8080)]
     (reset! server
             (serve (get-handler)
-                   {:port port                   
+                   {:port port
                     :auto-reload? true
                     :join true}))
     (println (str "You can view the site at http://localhost:" port))))

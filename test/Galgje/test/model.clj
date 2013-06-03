@@ -1,7 +1,7 @@
-(ns tictactoe.test.model
-  (:use tictactoe.model)
+(ns galgje.test.model
+  (:use galgje.model)
   (:use clojure.test)
-  (:require [tictactoe.test.testdata :as td]))
+  (:require [galgje.test.testdata :as td]))
 
 (deftest get-board-cell-test
   (let [testboard [[\X \- \-]
@@ -19,9 +19,9 @@
 
 (defmacro defboardtest [name winfn positives negatives]
   `(deftest ~name
-     (doseq [player# [\X \O]]     
+     (doseq [player# [\X \O]]
        (doseq [board# (~positives player#)]
-         (is (= (~winfn board# player#) true) 
+         (is (= (~winfn board# player#) true)
              (str "Player " player# " should win with board " board#)))
        (doseq [board# (~negatives player#)]
          (is (= (~winfn board# player#) false)
@@ -77,4 +77,3 @@
 
 
 
-  
