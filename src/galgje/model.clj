@@ -3,6 +3,7 @@
 
 (def init-state {:total-guesses 1 :word "winner"})
 
+
 (def chars-guessed (
 	atom ["a" "b" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" ])
 )
@@ -36,11 +37,12 @@
 )
 
 (defn new-state [old-state]
+  old-state
 	{
-		:total-guesses (3 (:total-guesses old-state))
+		:total-guesses (inc (:total-guesses old-state))
 		:word (str "timo" (:word old-state))
 	}
-	old-state
+	
 )
 
 (defn play! []
