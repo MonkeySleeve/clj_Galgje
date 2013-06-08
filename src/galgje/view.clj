@@ -12,22 +12,31 @@
     (include-css "/css/galgje.css")]
    [:body [:div#wrapper content]]))
 
+(defn play-screen []
+  (layout
+    [:div {:class (str "center-div")}
+     (input-field)
+     (submit-letter)
+     (hangman-image)
+       [:p "Turn " (model/get-total-guesses) ", choose a letter!"]]))
+
 (defn input-field []
   [:input {:name (str "guess")
            :maxlength 1
-           :pattern (str "[A-Za-z]") 
+           :pattern (str "[A-Za-z]")
            :type (str "text")}])
 
 (defn input-field-word []
   [:input {:name (str "word")
            :maxlength 16
-           :pattern (str "[A-Za-z]") 
+           :pattern (str "[A-Za-z]")
            :type (str "text")}])
 
 (defn submit-letter []
+  (form-to [:post "/"]
   [:input {:name (str "submit")
            :type (str "submit")
-           :value (str "Go!") }])
+           :value (str "Go!") }]))
 
 (defn hangman-image []
   [:div {:id (str "img-holder")}
@@ -37,37 +46,6 @@
     }]
   ]
 )
-
-(defn cell-html [rownum colnum cell with-submit?]
-  [:td
-   [:input {:name (str "b" rownum colnum)
-            :value (str cell)
-            :type (if with-submit?
-                    "submit"
-                    "button")}]])
-
-(defn row-html [rownum row with-submit?]
-  [:tr (map-indexed (fn [colnum cell]
-                      (cell-html rownum colnum cell with-submit?))
-                    row)])
-
-(defn board-html [board with-submit?]
-  (form-to [:post "/"]
-           [:table
-            (map-indexed (fn [rownum row]
-                           (row-html rownum row with-submit?))
-                         board)]))
-
-(defn play-screen []
-  (layout
-    [:div {:class (str "center-div")}
-     (hangman-image)
-     [:p "Turn " (model/get-turn) ", choose a letter!"]
-     [:p
-	     (input-field)
-	     (submit-letter)
-     ]
-       (board-html (model/get-board) true)]))
 
 (defn start-screen []
   (layout
@@ -84,12 +62,4 @@
   (layout
     [:div
    [:p "The winner is: " winner]
-   (board-html (model/get-board) false)
    (link-to "/" "Reset")]))
-
-(defn draw-screen []
-  (layout
-    [:div
-     [:p "It's a draw!"]
-     (board-html (model/get-board) false)
-     (link-to "/" "Reset")]))
