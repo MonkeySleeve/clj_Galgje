@@ -15,11 +15,19 @@
 (defn input-field []
   [:input {:name (str "guess")
            :maxlength 1
+           :pattern (str "[A-Za-z]") 
+           :type (str "text")}])
+
+(defn input-field-word []
+  [:input {:name (str "word")
+           :maxlength 16
+           :pattern (str "[A-Za-z]") 
            :type (str "text")}])
 
 (defn submit-letter []
   [:input {:name (str "submit")
-           :type (str "submit")}])
+           :type (str "submit")
+           :value (str "Go!") }])
 
 (defn hangman-image []
   [:div {:id (str "img-holder")}
@@ -53,10 +61,22 @@
 (defn play-screen []
   (layout
     [:div {:class (str "center-div")}
-     (input-field)
-     (submit-letter)
      (hangman-image)
-       [:p "Turn " (model/get-turn) ", choose a letter!"]
+     [:p "Turn " (model/get-turn) ", choose a letter!"]
+     [:p
+	     (input-field)
+	     (submit-letter)
+     ]
+       (board-html (model/get-board) true)]))
+
+(defn start-screen []
+  (layout
+    [:div {:class (str "center-div")}
+     [:p "Choose a word:"]
+     [:p
+	     (input-field-word)
+	     (submit-letter)
+     ]
        (board-html (model/get-board) true)]))
 
 (defn winner-screen [winner]

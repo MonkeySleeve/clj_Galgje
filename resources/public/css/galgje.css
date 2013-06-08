@@ -1,3 +1,16 @@
+body{
+	
+	margin: 0;
+	padding: 0;
+}
+
+div#wrapper
+{
+	margin: 0 auto;
+	width: 500px;
+	padding: 20px;
+}
+
 div#wrapper p {
 	font-size:15px;
 	font-family:Arial, Helvetica, sans-serif;
@@ -12,12 +25,13 @@ div#wrapper input[type="submit"]
 	background:#fff;
 	margin:1px;
 	color:#666;
+	vertical-align: middle;
 }
 
 div#wrapper input[type="text"] 
 {
 	width:50px;
-	height:50px;
+	height:46px;
 	border:1px solid #dedede;
 	background:#fff;
 	margin:1px;
@@ -25,19 +39,12 @@ div#wrapper input[type="text"]
 	font-size: 2em;
 	text-align: center;
 	text-transform: uppercase;
+	vertical-align: middle;
 }
 
 div#wrapper input:hover
 {
 	cursor:pointer;
-}
-
-div#wrapper
-{
-	color:#666;
-	position: absolute; 
-	top: 200px; 
-	left: 45%;"
 }
 
 div#wrapper a
@@ -56,9 +63,16 @@ div#wrapper a:hover
 	text-decoration:underline;
 }
 
+div#wrapper .center-div{
+	
+	margin: 0 auto;
+	width: auto;
+	padding-left: 25%;
+	padding-right: 25%;
+	
+}
+
 div#wrapper #img-holder{
-	width:600px;
-	height:600px;
-	border:1px solid #dedede;
-	padding: 1px;
+	width:314px;
+	height:366px;
 }
