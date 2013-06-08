@@ -12,6 +12,18 @@
     (include-css "/css/galgje.css")]
    [:body [:div#wrapper content]]))
 
+(defn input-field []
+  [:input {:name (str "guess")
+           :maxlength 1
+           :type (str "text")}])
+
+(defn hangman-image []
+  [:img {
+    :src (str "hangman" (model/get-turn) ".png")
+    :alt ("Hangman")
+  }]
+)
+
 (defn cell-html [rownum colnum cell with-submit?]
   [:td
    [:input {:name (str "b" rownum colnum)
@@ -35,8 +47,9 @@
 (defn play-screen []
   (layout
     [:div
-     [:p "Player " (model/get-player) ", choose a word!"]
-     (board-html (model/get-board) true)]))
+     (input-field)
+       [:p "Turn " (model/get-turn) ", choose a letter!"]
+       (board-html (model/get-board) true)]))
 
 (defn winner-screen [winner]
   (layout
@@ -51,4 +64,3 @@
      [:p "It's a draw!"]
      (board-html (model/get-board) false)
      (link-to "/" "Reset")]))
-
