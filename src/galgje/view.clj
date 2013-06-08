@@ -32,7 +32,7 @@
 (defn hangman-image []
   [:div {:id (str "img-holder")}
     [:img {
-      :src (str "/images/hangman" (model/get-turn) ".png")
+      :src (str "/images/hangman" (model/get-total-guesses) ".png")
       :alt (str "Hangman")
     }]
   ]
@@ -77,6 +77,7 @@
 	     (input-field-word)
 	     (submit-letter)
      ]
+       [:p "Turn " (model/get-total-guesses) ", choose a letter!"]
        (board-html (model/get-board) true)]))
 
 (defn winner-screen [winner]
