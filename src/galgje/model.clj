@@ -3,9 +3,9 @@
 
 (def init-state {:total-guesses 1 :word "winner"})
 
-(def chars-guessed (atom []))
+(def chars-guessed (atom ["a" "b" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" "c" ]))
 
-(defn get-guessed-characters []
+(defn get-guessed-characters
   (apply str (interpose ", " @chars-guessed)))
 
 (defn reset-game! []

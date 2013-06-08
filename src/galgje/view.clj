@@ -15,10 +15,21 @@
 (defn play-screen []
   (layout
     [:div {:class (str "center-div")}
-     (input-field)
-     (submit-letter)
-     (hangman-image)
-       [:p "Turn " (model/get-total-guesses) ", choose a letter!"]]))
+     [:div {:class (str "inputDiv")}
+            (input-field)
+            (submit-letter)
+            (guessed-chars)
+            ]
+      [:div {:class (str "hangman") }
+       [:p "Turn " (model/get-total-guesses) ", choose a letter!"]
+             (hangman-image)
+             ]
+      
+       [:div {:class (str "clearDiv")}]
+       ]
+    
+    )
+  )
 
 (defn input-field []
   [:input {:name (str "guess")
@@ -46,6 +57,16 @@
   ]
 )
 
+(defn guessed-chars []
+  [:div {:id (str "guessChars")}
+   [:p (str "Guessed characters: ") ]
+   [:p {:class (str "chars")} (model/get-guessed-characters) ]
+   ]
+  )
+
+
+
+
 (defn start-screen []
   (layout
     [:div {:class (str "center-div")}
@@ -56,7 +77,7 @@
 	     (submit-letter))
      ]
        [:p "Turn " (model/get-total-guesses) ", choose a letter!"]
-       (board-html (model/get-board) true)]))
+       ]))
 
 (defn winner-screen [winner]
   (layout
