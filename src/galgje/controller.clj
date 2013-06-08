@@ -11,7 +11,7 @@
 	(view/play-screen)
 )
 
-(defn turn-page []
+(defn turn-page [button-pressed]
 	; (model/new-state)
 	; (let [button-id (name (first (keys button-pressed)))
 	;       rownr (Integer/parseInt (str (second button-id)))
@@ -27,5 +27,5 @@
 
 (defroutes galgje-routes
 	(GET "/" [] (start-page))
-	(POST "/" {button-pressed :params} (turn-page))
+	(POST "/" {button-pressed :params} (turn-page button-pressed))
 )

@@ -37,12 +37,11 @@
 )
 
 (defn new-state [old-state]
-  old-state
+	old-state
 	{
 		:total-guesses (inc (:total-guesses old-state))
-		:word (str "timo" (:word old-state))
+		:word (:word old-state)
 	}
-	
 )
 
 (defn play! []

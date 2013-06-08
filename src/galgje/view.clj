@@ -36,7 +36,7 @@
 				(guessed-chars)
 			]
 			[:div {:class (str "hangman") }
-				[:p "Turn " (model/get-total-guesses) ", choose a letter!"]
+				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
 					(hangman-image)
 			]
 			[:div {:class (str "clearDiv")}]
