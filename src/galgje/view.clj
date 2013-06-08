@@ -33,10 +33,9 @@
            :type (str "text")}])
 
 (defn submit-letter []
-  (form-to [:post "/"]
   [:input {:name (str "submit")
            :type (str "submit")
-           :value (str "Go!") }]))
+           :value (str "Go!") }])
 
 (defn hangman-image []
   [:div {:id (str "img-holder")}
@@ -52,8 +51,9 @@
     [:div {:class (str "center-div")}
      [:p "Choose a word:"]
      [:p
+      (form-to [:post "/"]
 	     (input-field-word)
-	     (submit-letter)
+	     (submit-letter))
      ]
        [:p "Turn " (model/get-total-guesses) ", choose a letter!"]
        (board-html (model/get-board) true)]))
