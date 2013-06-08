@@ -4,7 +4,7 @@
 (def empty-board [[\- \- \-]
                   [\- \- \-]
                   [\- \- \-]])
-(def init-state {:board empty-board :player \X :turn 1 :word "winner"})
+(def init-state {:board empty-board :player \X :total-guesses 1 :word "winner"})
 
 (defn reset-game! []
   (session/put! :game-state init-state))
@@ -12,8 +12,8 @@
 (defn get-board []
   (:board (session/get :game-state)))
 
-(defn get-turn []
-  (:turn (session/get :game-state)))
+(defn get-total-guesses []
+  (:total-guesses (session/get :game-state)))
 
 (defn get-board-cell
   ([row col]
@@ -68,7 +68,7 @@ returns the character for the winning player, nil if there is no winner"
   (if (and (= (get-board-cell (:board old-state) row col) \-)
            (not (winner? (:board old-state))))
     {:board (assoc-in (:board old-state) [row col] (:player old-state))
-     :player (other-player (:player old-state)) :turn 2}
+     :player (other-player (:player old-state)) :total-guesses 2}
     old-state))
 
 (defn play! [row col]
