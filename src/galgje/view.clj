@@ -19,8 +19,8 @@
 
 (defn hangman-image []
   [:img {
-    :src (str "hangman" (model/get-turn) ".png")
-    :alt ("Hangman")
+    :src (str "/images/hangman" (model/get-turn) ".png")
+    :alt (str "Hangman")
   }]
 )
 
@@ -48,6 +48,7 @@
   (layout
     [:div
      (input-field)
+     (hangman-image)
        [:p "Turn " (model/get-turn) ", choose a letter!"]
        (board-html (model/get-board) true)]))
 
