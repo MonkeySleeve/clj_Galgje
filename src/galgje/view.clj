@@ -17,11 +17,17 @@
            :maxlength 1
            :type (str "text")}])
 
+(defn submit-letter []
+  [:input {:name (str "submit")
+           :type (str "submit")}])
+
 (defn hangman-image []
-  [:img {
-    :src (str "/images/hangman" (model/get-turn) ".png")
-    :alt (str "Hangman")
-  }]
+  [:div {:id (str "img-holder")}
+    [:img {
+      :src (str "/images/hangman" (model/get-turn) ".png")
+      :alt (str "Hangman")
+    }]
+  ]
 )
 
 (defn cell-html [rownum colnum cell with-submit?]
@@ -46,8 +52,9 @@
 
 (defn play-screen []
   (layout
-    [:div
+    [:div {:class (str "center-div")}
      (input-field)
+     (submit-letter)
      (hangman-image)
        [:p "Turn " (model/get-turn) ", choose a letter!"]
        (board-html (model/get-board) true)]))
