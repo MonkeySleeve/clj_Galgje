@@ -35,15 +35,6 @@
 	}]
 )
 
-(defn input-field-word []
-	[:input {
-		:name (str "word")
-		:maxlength 16
-		:pattern (str "[A-Za-z]")
-		:type (str "text")
-	}]
-)
-
 (defn submit-letter []
 	[:input {
 		:name (str "submit")
@@ -71,12 +62,22 @@
 				(guessed-chars)
 			]
 			[:div {:class (str "hangman") }
-				[:p "Turn " (model/get-total-guesses) ", choose a letter!"]
+				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
+
 					(hangman-image)
 			]
 			[:div {:class (str "clearDiv")}]
 		]
 	)
+)
+
+(defn input-field-word []
+	[:input {
+		:name (str "word")
+		:maxlength 16
+		:pattern (str "[A-Za-z]")
+		:type (str "text")
+	}]
 )
 
 (defn start-screen []
