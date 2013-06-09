@@ -26,11 +26,6 @@
 	(clojure.string/split get-word #"")
 )
 
-(defn letter-in-word? [letter]
-
-)
-
-
 (defn new-state [old-state]
 	old-state
 	{
@@ -43,10 +38,11 @@
  (swap! chars-guessed conj char-guessed)
 )
 
-(defn guess-char [c]
-  (swap! chars-guessed assoc (c ) :guess)
-)
-(defn play!
+(defn is-char-in-word? [char-guessed]
+  (.contains (str get-word) char-guessed)
+  )
+
+(defn draw-hangman! []
 	(session/swap! (fn [session-map]
 		(assoc session-map :game-state
 			(new-state (:game-state session-map))
