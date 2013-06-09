@@ -12,18 +12,18 @@
 )
 
 (defn letter-submit [input-params]
-	(if-not(model/is-char-in-word? (get input-params :guess))
+	(if-not
+		(model/is-char-in-word? (first(get input-params :guess)))
 		(model/draw-hangman!)
-		(println "hang that man!")
 	)
-	(model/add-char-guessed (get input-params :guess))
-	(view/play-screen)
-	; (if (model/winner?)
-	; 	(view/winner-screen)
-	; )
-	; (if (= model/get-total-guesses 13)
+	(model/add-char-guessed (first(get input-params :guess)))
+	; (if (= (model/get-total-guesses) 13)
 	; 	(view/loser-screen)
 	; )
+	(if (model/winner?)
+		(view/winner-screen)
+		(view/play-screen)
+	)
 )
 
 (defroutes galgje-routes
