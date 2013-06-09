@@ -29,10 +29,14 @@
 	(.contains (str get-word) char-guessed)
 )
 
+(defn guessed-character? [char-guessed]
+	(.contains (get-guessed-characters) char-guessed)
+)
+
 (defn get-remaining-characters []
 	; (println (count (get-word)))
 	(for [x (range (count (get-word)))]
-		(if (is-char-in-word? (subs (get-word) x (+ x 1)))
+		(if (guessed-character? (subs (get-word) x (+ x 1)))
 				(str (subs (get-word) x (+ x 1)))
 				(str "_")
 		)
