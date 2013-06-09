@@ -52,6 +52,12 @@
 	]
 )
 
+(defn remaining-characters []
+	[:div {:style (str "font-size: 20px; letter-spacing: 1.3em;")}
+		(model/get-remaining-characters)
+	]
+)
+
 (defn play-screen []
 	(layout
 		[:div {:class (str "center-div")}
@@ -65,6 +71,7 @@
 				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
 
 					(hangman-image)
+					(remaining-characters)
 			]
 			[:div {:class (str "clearDiv")}]
 		]

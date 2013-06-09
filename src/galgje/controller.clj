@@ -12,7 +12,7 @@
 )
 
 (defn letter-submit [input-params]
-	; 
+	;
 	; (let [button-id (name (first (keys input-params)))
 	;       rownr (Integer/parseInt (str (second button-id)))
 	;       colnr (Integer/parseInt (str (nth button-id 2)))]
