@@ -26,37 +26,10 @@
 	]
 )
 
-(defn play-screen []
-	(layout
-		[:div {:class (str "center-div")}
-			[:div {:class (str "inputDiv")}
-				(form-to [:post "/"]
-					(input-field)
-					(submit-letter))
-				(guessed-chars)
-			]
-			[:div {:class (str "hangman") }
-				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
-					(hangman-image)
-			]
-			[:div {:class (str "clearDiv")}]
-		]
-	)
-)
-
 (defn input-field []
 	[:input {
 		:name (str "guess")
 		:maxlength 1
-		:pattern (str "[A-Za-z]")
-		:type (str "text")
-	}]
-)
-
-(defn input-field-word []
-	[:input {
-		:name (str "word")
-		:maxlength 16
 		:pattern (str "[A-Za-z]")
 		:type (str "text")
 	}]
@@ -77,6 +50,33 @@
 			:alt (str "Hangman")
 		}]
 	]
+)
+
+(defn play-screen []
+	(layout
+		[:div {:class (str "center-div")}
+			[:div {:class (str "inputDiv")}
+				(form-to [:post "/"]
+					(input-field)
+					(submit-letter))
+				(guessed-chars)
+			]
+			[:div {:class (str "hangman") }
+				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
+					(hangman-image)
+			]
+			[:div {:class (str "clearDiv")}]
+		]
+	)
+)
+
+(defn input-field-word []
+	[:input {
+		:name (str "word")
+		:maxlength 16
+		:pattern (str "[A-Za-z]")
+		:type (str "text")
+	}]
 )
 
 (defn start-screen []
