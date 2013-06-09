@@ -1,8 +1,11 @@
 (ns galgje.model
-	(:require [noir.session :as session]))
+	(:require [noir.session :as session])
+)
 
-(def init-state {:total-guesses 1 :word "winner"})
-
+(def init-state {
+	:total-guesses 1
+	:word "winner"
+})
 
 (def chars-guessed (atom ()))
 
@@ -22,6 +25,22 @@
 	(:word (session/get :game-state))
 )
 
+(defn is-char-in-word? [char-guessed]
+	(.contains (str get-word) char-guessed)
+)
+
+(defn get-remaining-characters []
+	; (println (count (get-word)))
+	(for [x (range (count (get-word)))]
+		(if (is-char-in-word? (subs (get-word) x (+ x 1)))
+				(str (subs (get-word) x (+ x 1)))
+				(str "_")
+		)
+		; (str (subs (get-word) x (+ x 1)))
+	)
+	; str "_______"
+)
+
 (defn get-word-vector []
 	(clojure.string/split get-word #"")
 )
@@ -35,12 +54,8 @@
 )
 
 (defn add-char-guessed [char-guessed]
- (swap! chars-guessed conj char-guessed)
+	(swap! chars-guessed conj char-guessed)
 )
-
-(defn is-char-in-word? [char-guessed]
-  (.contains (str get-word) char-guessed)
-  )
 
 (defn draw-hangman! []
 	(session/swap! (fn [session-map]
