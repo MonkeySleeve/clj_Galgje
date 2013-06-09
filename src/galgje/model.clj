@@ -35,7 +35,7 @@
 )
 
 (defn add-char-guessed [char-guessed]
- (swap! chars-guessed conj char-guessed)
+  (if-not (.contains @chars-guessed char-guessed) (swap! chars-guessed conj char-guessed))
 )
 
 (defn is-char-in-word? [char-guessed]
