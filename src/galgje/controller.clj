@@ -11,12 +11,13 @@
 	(view/play-screen)
 )
 
-(defn turn-page []
+(defn turn-page [button-pressed]
 	; (model/new-state)
-	; (let [button-id (name (first (keys button-pressed)))
+  
 	;       rownr (Integer/parseInt (str (second button-id)))
 	;       colnr (Integer/parseInt (str (nth button-id 2)))]
-	(model/play!)
+ 
+	(model/play! [button-pressed])
 	(view/play-screen)
 		; (if-let [winner (model/winner?)]
 		;   (view/winner-screen winner)
@@ -27,5 +28,5 @@
 
 (defroutes galgje-routes
 	(GET "/" [] (start-page))
-	(POST "/" {button-pressed :params} (turn-page))
+	(POST "/" {button-pressed :params} (turn-page button-pressed))
 )
