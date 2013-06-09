@@ -101,10 +101,19 @@
 	)
 )
 
-(defn winner-screen [winner]
+(defn winner-screen []
 	(layout
 		[:div
-			[:p "The winner is: " winner]
+			[:p "You've guessed the word!"]
+				(link-to "/" "Reset")
+		]
+	)
+)
+
+(defn loser-screen []
+	(layout
+		[:div
+			[:p "You've lost!"]
 				(link-to "/" "Reset")
 		]
 	)

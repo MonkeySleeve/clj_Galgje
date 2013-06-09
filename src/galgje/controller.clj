@@ -12,21 +12,18 @@
 )
 
 (defn letter-submit [input-params]
-	;
-	; (let [button-id (name (first (keys input-params)))
-	;       rownr (Integer/parseInt (str (second button-id)))
-	;       colnr (Integer/parseInt (str (nth button-id 2)))]
- 
- (if-not(model/is-char-in-word? (get input-params :guess))
-   (model/draw-hangman!)(println "hang that man!")
-   )
- (model/add-char-guessed (get input-params :guess))
- (view/play-screen)
-		; (if-let [winner (model/winner?)]
-		;   (view/winner-screen winner)
-		;   (if (model/full-board?)
-		;     (view/draw-screen)
-		;     (view/play-screen)
+	(if-not(model/is-char-in-word? (get input-params :guess))
+		(model/draw-hangman!)
+		(println "hang that man!")
+	)
+	(model/add-char-guessed (get input-params :guess))
+	(view/play-screen)
+	; (if (model/winner?)
+	; 	(view/winner-screen)
+	; )
+	; (if (= model/get-total-guesses 13)
+	; 	(view/loser-screen)
+	; )
 )
 
 (defroutes galgje-routes
