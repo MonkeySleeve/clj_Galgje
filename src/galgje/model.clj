@@ -4,7 +4,7 @@
 (def init-state {:total-guesses 1 :word "winner"})
 
 
-(def chars-guessed (atom {}))
+(def chars-guessed (atom ()))
 
 (defn get-guessed-characters []
 	(apply str (interpose ", " @chars-guessed))
@@ -40,14 +40,13 @@
 )
 
 (defn add-char-guessed [char-guessed]
-	(println(char-guessed))
-	; (swap! chars-guessed conj char-guessed)
+ (swap! chars-guessed conj char-guessed)
 )
+
 (defn guess-char [c]
   (swap! chars-guessed assoc (c ) :guess)
 )
-(defn play! [c]
-  (guess-char [c])
+(defn play!
 	(session/swap! (fn [session-map]
 		(assoc session-map :game-state
 			(new-state (:game-state session-map))

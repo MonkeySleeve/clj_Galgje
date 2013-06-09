@@ -26,8 +26,8 @@
 	;       rownr (Integer/parseInt (str (second button-id)))
 	;       colnr (Integer/parseInt (str (nth button-id 2)))]
 	(model/add-char-guessed (get input-params :guess))
-	; (model/play!)
-	; (view/play-screen)
+	(model/play!)
+	(view/play-screen)
 		; (if-let [winner (model/winner?)]
 		;   (view/winner-screen winner)
 		;   (if (model/full-board?)
