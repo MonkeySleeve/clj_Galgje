@@ -30,6 +30,7 @@
 	[:input {
 		:name (str "guess")
 		:maxlength 1
+    :required (str "required")
 		:pattern (str "[A-Za-z]")
 		:type (str "text")
     :autofocus (str "autofocus")
@@ -101,9 +102,8 @@
 		]
 	)
 )
-
-(defn winner-screen []
-  (layout
+(defn loser-screen []
+	(layout
 		[:div {:class (str "center-div")}
 			[:div {:class (str "inputDiv")}
 				(form-to [:post "/"]
@@ -112,8 +112,8 @@
 				(guessed-chars)
 			]
    [:div {:class (str "notificationDiv")}
-			[:h2 "You've guessed the word!"]
-				(link-to "/" "Reset")
+			[:h2 "You've lost!"]
+				(link-to {:class (str "reset")} "/" "Reset")
 		]
 			[:div {:class (str "hangman") }
 				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
@@ -126,8 +126,8 @@
 	)
 )
 
-(defn loser-screen []
-	(layout
+(defn winner-screen []
+  (layout
 		[:div {:class (str "center-div")}
 			[:div {:class (str "inputDiv")}
 				(form-to [:post "/"]
@@ -136,8 +136,8 @@
 				(guessed-chars)
 			]
    [:div {:class (str "notificationDiv")}
-			[:h2 "You've lost!"]
-				(link-to "/" "Reset")
+			[:h2 "You've guessed the word!"]
+				(link-to {:class (str "reset")} "/" "Reset")
 		]
 			[:div {:class (str "hangman") }
 				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]

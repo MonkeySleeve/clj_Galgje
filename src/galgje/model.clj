@@ -54,9 +54,11 @@
 )
 
 (defn add-char-guessed [char-guessed]
-	(when-not (@chars-guessed char-guessed)
-		(swap! chars-guessed conj char-guessed)
+  (if-not(= char-guessed "")
+    (when-not (@chars-guessed char-guessed)
+      (swap! chars-guessed conj char-guessed)
 	)
+ )
 )
 
 (defn draw-hangman! []
@@ -69,4 +71,8 @@
 
 (defn winner? []
 	(not(some #{\_} (get-remaining-characters)))
+)
+
+(defn loser? []
+	(= (get-total-guesses) 12)
 )
