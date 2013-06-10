@@ -9,6 +9,18 @@ body{
 .clearDiv{
 	clear: both;
 }
+
+.notificationDiv {
+	border:1px solid #dedede;	
+	position: fixed;
+	top: 25%;
+	left: 25%;
+	width: auto;
+	height: auto;
+	padding: 5px;
+	
+}
+
 div#wrapper
 {
 	margin: 0 auto;

@@ -32,6 +32,7 @@
 		:maxlength 1
 		:pattern (str "[A-Za-z]")
 		:type (str "text")
+    :autofocus (str "autofocus")
 	}]
 )
 
@@ -102,19 +103,49 @@
 )
 
 (defn winner-screen []
-	(layout
-		[:div
-			[:p "You've guessed the word!"]
+  (layout
+		[:div {:class (str "center-div")}
+			[:div {:class (str "inputDiv")}
+				(form-to [:post "/"]
+					(input-field)
+					(submit-letter))
+				(guessed-chars)
+			]
+   [:div {:class (str "notificationDiv")}
+			[:h2 "You've guessed the word!"]
 				(link-to "/" "Reset")
+		]
+			[:div {:class (str "hangman") }
+				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
+
+					(hangman-image)
+					(remaining-characters)
+			]
+			[:div {:class (str "clearDiv")}]
 		]
 	)
 )
 
 (defn loser-screen []
 	(layout
-		[:div
-			[:p "You've lost!"]
+		[:div {:class (str "center-div")}
+			[:div {:class (str "inputDiv")}
+				(form-to [:post "/"]
+					(input-field)
+					(submit-letter))
+				(guessed-chars)
+			]
+   [:div {:class (str "notificationDiv")}
+			[:h2 "You've lost!"]
 				(link-to "/" "Reset")
+		]
+			[:div {:class (str "hangman") }
+				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
+
+					(hangman-image)
+					(remaining-characters)
+			]
+			[:div {:class (str "clearDiv")}]
 		]
 	)
 )
