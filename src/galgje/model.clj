@@ -13,6 +13,11 @@
 	(apply str (interpose ", " @chars-guessed))
 )
 
+
+(defn to-lower-case [entity]
+  (clojure.string/lower-case entity)
+  )
+
 (defn reset-game! []
 	(session/put! :game-state init-state)
   (reset! chars-guessed #{})
@@ -31,7 +36,7 @@
 )
 
 (defn guessed-character? [char-guessed]
-	(@chars-guessed char-guessed)
+	(@chars-guessed (to-lower-case char-guessed))
 )
 
 (defn get-remaining-characters []
@@ -53,8 +58,8 @@
 
 (defn add-char-guessed [char-guessed]
   (if-not(= char-guessed "")
-    (when-not (@chars-guessed char-guessed)
-      (swap! chars-guessed conj char-guessed)
+    (when-not (@chars-guessed (to-lower-case char-guessed))
+      (swap! chars-guessed conj (to-lower-case char-guessed))
 	)
  )
 )
@@ -70,7 +75,7 @@
 (defn set-word! [word]
 	(session/swap!  
    (fn [session-map]
-      (assoc-in session-map [:game-state :word] (clojure.string/lower-case word))
+      (assoc-in session-map [:game-state :word] (to-lower-case word))
 		)
 	)
 )

@@ -44,7 +44,7 @@
 		:name (str "word")
 		:maxlength 20
     :required (str "required")
-		:pattern (str "[A-Za-z]*")
+		:pattern (str "[A-Za-z]*.{3,}")
 		:type (str "text")
     :autofocus (str "autofocus")
 	}]
