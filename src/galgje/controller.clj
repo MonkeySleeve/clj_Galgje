@@ -18,7 +18,7 @@
 	;       colnr (Integer/parseInt (str (nth button-id 2)))]
  
  (if-not(model/is-char-in-word? (get input-params :guess))
-   (model/draw-hangman!)(println "hang that man!")
+   (model/draw-hangman!)
    )
  (model/add-char-guessed (get input-params :guess))
  (view/play-screen)
