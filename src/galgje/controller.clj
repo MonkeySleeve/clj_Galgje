@@ -8,7 +8,7 @@
 
 (defn start-page []
 	(model/reset-game!)
-	(view/play-screen)
+	(view/start-screen)
 )
 
 (defn letter-submit [input-params]
@@ -26,9 +26,16 @@
 	)
 )
 
+(defn word-submit [input-params]
+  (model/set-word! (first(get input-params :word))) 
+  (view/play-screen)
+)
+
 (defroutes galgje-routes
 	(GET "/" [] (start-page))
-  (GET "/reset" [] (start-page))
+  (POST "/startgame" {input-params :params}
+		(word-submit input-params)
+	)
 	(POST "/" {input-params :params}
 		(letter-submit input-params)
 	)

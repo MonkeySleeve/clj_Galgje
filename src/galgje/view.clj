@@ -37,6 +37,19 @@
 	}]
 )
 
+
+(defn input-field-word []
+	[:input {
+    :class (str "inputWord")
+		:name (str "word")
+		:maxlength 20
+    :required (str "required")
+		:pattern (str "[A-Za-z]*")
+		:type (str "text")
+    :autofocus (str "autofocus")
+	}]
+)
+
 (defn submit-letter [disabled]
 	[:input {
     :disabled (boolean disabled)
@@ -81,25 +94,18 @@
 	)
 )
 
-(defn input-field-word []
-	[:input {
-		:name (str "word")
-		:maxlength 16
-		:pattern (str "[A-Za-z]")
-		:type (str "text")
-	}]
-)
-
 (defn start-screen []
 	(layout
 		[:div {:class (str "center-div")}
-			[:p "Choose a word:"]
-			[:p
-				(form-to [:post "/"]
-					(input-field-word)
-					(submit-letter (boolean false)))
-			]
-			[:p "Turn " (model/get-total-guesses) ", choose a letter!"]
+     [:div {:class (str "startDiv")}
+				[:h2 "Choose a word:"]
+				[:p
+					(form-to [:post "/"]
+						(input-field-word)
+						(submit-letter (boolean false))
+            [:p {:class (str "smallP")} "Maximum of 20 characters"])
+				]
+	   ]
 		]
 	)
 )
@@ -114,7 +120,7 @@
 			]
    [:div {:class (str "notificationDiv")}
 			[:h2 "You've lost!"]
-				(link-to {:class (str "reset")} "/reset" "Reset")
+				(link-to {:class (str "reset")} "/" "Reset")
 		]
 			[:div {:class (str "hangman") }
 				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
@@ -138,7 +144,7 @@
 			]
    [:div {:class (str "notificationDiv")}
 			[:h2 "You've guessed the word!"]
-				(link-to {:class (str "reset")} "/reset" "Reset")
+				(link-to {:class (str "reset")} "/" "Reset")
 		]
 			[:div {:class (str "hangman") }
 				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]

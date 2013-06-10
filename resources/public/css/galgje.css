@@ -10,6 +10,17 @@ body{
 	clear: both;
 }
 
+.startDiv{
+	border:1px solid #dedede;	
+	background: #efefef;
+	position: fixed;
+	top: 28%;
+	left: 32%;
+	width: auto;
+	height: auto;
+	padding: 20px;
+}
+
 .notificationDiv {
 	border:1px solid #dedede;	
 	background: #efefef;
@@ -47,9 +58,23 @@ div#wrapper input[type="submit"]
 	vertical-align: middle;
 }
 
-div#wrapper input[type="text"] 
+div#wrapper input[type="text"]
 {
 	width:50px;
+	height:46px;
+	border:1px solid #dedede;
+	background:#fff;
+	margin:1px;
+	color:#666;
+	font-size: 2em;
+	text-align: center;
+	text-transform: uppercase;
+	vertical-align: middle;
+}
+
+div#wrapper input[type="text"].inputWord
+{
+	width:471px;
 	height:46px;
 	border:1px solid #dedede;
 	background:#fff;
@@ -111,4 +136,9 @@ div#wrapper .center-div{
 }
 .hangman p {
 	color: #666666;
+}
+
+.smallP{
+	font-size: 10px;
+	color: #666;
 }
