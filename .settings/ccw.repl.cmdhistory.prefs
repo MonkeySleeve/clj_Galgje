@@ -1,0 +1,2 @@
+cmdhistory=["(clojure.core/ns galgje.model)\\n\\r\\n(defn get-total-guesses []\\r\\n\\t(\:total-guesses (session/get \:game-state))\\r\\n)\\n(clojure.core/ns user)" "(clojure.core/ns galgje.model)\\n(def init-state {\:total-guesses 1 \:word \\"winner\\"})\\n(clojure.core/ns user)" "(clojure.core/ns galgje.model)\\n(defn get-total-guesses []\\r\\n\\t(\:total-guesses (session/get \:game-state))\\r\\n)\\n(clojure.core/ns user)"]
+eclipse.preferences.version=1

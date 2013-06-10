@@ -1,75 +1,89 @@
 (ns galgje.model
-  (:require [noir.session :as session]))
+	(:require [noir.session :as session])
+)
 
-(def empty-board [[\- \- \-]
-                  [\- \- \-]
-                  [\- \- \-]])
+(def init-state {
+	:total-guesses 1
+	:word ""
+})
 
-(def init-state {:board empty-board :player \X})
+(def chars-guessed (atom #{}))
+
+(defn get-guessed-characters []
+	(apply str (interpose ", " @chars-guessed))
+)
+
+
+(defn to-lower-case [entity]
+  (clojure.string/lower-case entity)
+  )
 
 (defn reset-game! []
-  (session/put! :game-state init-state))
+	(session/put! :game-state init-state)
+  (reset! chars-guessed #{})
+)
 
-(defn get-board []
-  (:board (session/get :game-state)))
+(defn get-total-guesses []
+	(:total-guesses (session/get :game-state))
+)
 
-(defn get-board-cell
-  ([row col]
-    (get-board-cell (get-board) row col))
-  ([board row col]
-    (get-in board [row col])))
+(defn get-word []
+	(:word (session/get :game-state))
+)
 
-(defn get-player []
-  (:player (session/get :game-state)))
+(defn is-char-in-word? [char-guessed]
+	(some #{char-guessed} (get-word))
+)
 
-(defn other-player
-  ([] (other-player (get-player)))
-  ([player] (if (= player \X) \O \X)))
+(defn guessed-character? [char-guessed]
+	(@chars-guessed (to-lower-case char-guessed))
+)
 
-(defn winner-in-rows? [board player]
-  (boolean (some (fn [row] (every? (fn [c] (= c player)) row)) board)))
+(defn get-remaining-characters []
+	(->>
+		(for [c (get-word)]
+			(if (guessed-character? c)
+				c
+				\_
+			)
+		)
+		(apply str)
+	)
+)
 
-(defn transposed-board [board]
-  (vec (apply map vector board)))
+(defn get-word-vector []
+	(clojure.string/split (get-word) #"")
+)
 
-(defn winner-in-cols? [board player]
-  (winner-in-rows? (transposed-board board) player))
 
-(defn winner-in-diagonals? [board player]
-  (let [diag-coords [[[0 0] [1 1] [2 2]]
-                     [[0 2] [1 1] [2 0]]]]
-    (boolean (some (fn [coords]
-                     (every? (fn [coord]
-                               (= player (apply get-board-cell board coord)))
-                             coords))
-                   diag-coords))))
+(defn add-char-guessed [char-guessed]
+  (if-not(= char-guessed "")
+    (when-not (@chars-guessed (to-lower-case char-guessed))
+      (swap! chars-guessed conj (to-lower-case char-guessed))
+	)
+ )
+)
 
-(defn winner?
-  "checks if there is a winner. when called with no args, checks for player X and player O.
-returns the character for the winning player, nil if there is no winner"
-  ([] (winner? (get-board)))
-  ([board]
-    (boolean (or (winner? board \X)
-                 (winner? board \O))))
-  ([board player]
-    (if (or (winner-in-rows? board player)
-            (winner-in-cols? board player)
-            (winner-in-diagonals? board player))
-      player)))
+(defn draw-hangman! []
+	(session/swap!
+		(fn [session-map]
+			(update-in session-map [:game-state :total-guesses] inc)
+		)
+	)
+)
 
-(defn full-board?
-  ([] (full-board? (get-board)))
-  ([board] (let [all-cells (apply concat board)]
-             (not-any? #(= % \-) all-cells))))
+(defn set-word! [word]
+	(session/swap!  
+   (fn [session-map]
+      (assoc-in session-map [:game-state :word] (to-lower-case word))
+		)
+	)
+)
 
-(defn new-state [row col old-state]
-  (if (and (= (get-board-cell (:board old-state) row col) \-)
-           (not (winner? (:board old-state))))
-    {:board (assoc-in (:board old-state) [row col] (:player old-state))
-     :player (other-player (:player old-state))}
-    old-state))
+(defn winner? []
+	(not(some #{\_} (get-remaining-characters)))
+)
 
-(defn play! [row col]
-  (session/swap! (fn [session-map]
-                   (assoc session-map :game-state
-                          (new-state row col (:game-state session-map))))))
+(defn loser? []
+	(= (get-total-guesses) 12)
+)
