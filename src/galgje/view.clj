@@ -37,8 +37,9 @@
 	}]
 )
 
-(defn submit-letter []
+(defn submit-letter [disabled]
 	[:input {
+    :disabled (boolean disabled)
 		:name (str "submit")
 		:type (str "submit")
 		:value (str "Go!")
@@ -66,7 +67,7 @@
 			[:div {:class (str "inputDiv")}
 				(form-to [:post "/"]
 					(input-field)
-					(submit-letter))
+					(submit-letter (boolean false)))
 				(guessed-chars)
 			]
 			[:div {:class (str "hangman") }
@@ -96,7 +97,7 @@
 			[:p
 				(form-to [:post "/"]
 					(input-field-word)
-					(submit-letter))
+					(submit-letter (boolean false)))
 			]
 			[:p "Turn " (model/get-total-guesses) ", choose a letter!"]
 		]
@@ -107,13 +108,13 @@
 		[:div {:class (str "center-div")}
 			[:div {:class (str "inputDiv")}
 				(form-to [:post "/"]
-					(input-field)
-					(submit-letter))
+					(input-field )
+					(submit-letter (boolean true)))
 				(guessed-chars)
 			]
    [:div {:class (str "notificationDiv")}
 			[:h2 "You've lost!"]
-				(link-to {:class (str "reset")} "/" "Reset")
+				(link-to {:class (str "reset")} "/reset" "Reset")
 		]
 			[:div {:class (str "hangman") }
 				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
@@ -132,12 +133,12 @@
 			[:div {:class (str "inputDiv")}
 				(form-to [:post "/"]
 					(input-field)
-					(submit-letter))
+					(submit-letter (boolean true)))
 				(guessed-chars)
 			]
    [:div {:class (str "notificationDiv")}
 			[:h2 "You've guessed the word!"]
-				(link-to {:class (str "reset")} "/" "Reset")
+				(link-to {:class (str "reset")} "/reset" "Reset")
 		]
 			[:div {:class (str "hangman") }
 				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]

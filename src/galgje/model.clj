@@ -15,6 +15,7 @@
 
 (defn reset-game! []
 	(session/put! :game-state init-state)
+  (reset! chars-guessed #{})
 )
 
 (defn get-total-guesses []

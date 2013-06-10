@@ -12,19 +12,23 @@
 )
 
 (defn letter-submit [input-params]
+  (model/add-char-guessed (first(get input-params :guess))) 
   
 	(if-not(model/is-char-in-word? (first(get input-params :guess)))
 		(model/draw-hangman!)
 	)
-	(model/add-char-guessed (first(get input-params :guess)))
 	
-	(if (model/winner?)
-		(view/winner-screen)
+	(if(model/winner?)
+   (view/winner-screen)
+   (if(model/loser?)
+     (view/loser-screen) 
+     (view/play-screen))
 	)
 )
 
 (defroutes galgje-routes
 	(GET "/" [] (start-page))
+  (GET "/reset" [] (start-page))
 	(POST "/" {input-params :params}
 		(letter-submit input-params)
 	)
