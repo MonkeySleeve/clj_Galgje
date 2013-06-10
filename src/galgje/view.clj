@@ -69,7 +69,7 @@
 )
 
 (defn remaining-characters []
-	[:div {:style (str "font-size: 20px; letter-spacing: 1.3em;")}
+	[:div {:class (str "remainingChars")}
 		(model/get-remaining-characters)
 	]
 )
@@ -84,10 +84,10 @@
 				(guessed-chars)
 			]
 			[:div {:class (str "hangman") }
-				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
+				[:p "Turn " (model/get-total-guesses) ", choose a letter!"]
 
-					(hangman-image)
 					(remaining-characters)
+					(hangman-image)
 			]
 			[:div {:class (str "clearDiv")}]
 		]
@@ -100,7 +100,7 @@
      [:div {:class (str "startDiv")}
 				[:h2 "Choose a word:"]
 				[:p
-					(form-to [:post "/"]
+					(form-to [:post "/startgame"]
 						(input-field-word)
 						(submit-letter (boolean false))
             [:p {:class (str "smallP")} "Maximum of 20 characters"])
@@ -123,10 +123,10 @@
 				(link-to {:class (str "reset")} "/" "Reset")
 		]
 			[:div {:class (str "hangman") }
-				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
+				[:p "Turn " (model/get-total-guesses) ", choose a letter!"]
 
-					(hangman-image)
 					(remaining-characters)
+					(hangman-image)
 			]
 			[:div {:class (str "clearDiv")}]
 		]
@@ -147,10 +147,10 @@
 				(link-to {:class (str "reset")} "/" "Reset")
 		]
 			[:div {:class (str "hangman") }
-				[:p "Turn " (model/get-total-guesses) ", word is: " (model/get-word)", choose a letter!"]
+				[:p "Turn " (model/get-total-guesses) ", choose a letter!"]
 
-					(hangman-image)
 					(remaining-characters)
+					(hangman-image)
 			]
 			[:div {:class (str "clearDiv")}]
 		]

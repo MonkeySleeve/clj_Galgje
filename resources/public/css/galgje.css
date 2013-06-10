@@ -21,6 +21,16 @@ body{
 	padding: 20px;
 }
 
+.remainingChars{
+	font-size: 20px;
+	letter-spacing: 1.3em;
+	border: 1px solid #dedede;
+	padding: 5px;
+	text-align: center;
+	text-transform: uppercase;
+	
+}
+
 .notificationDiv {
 	border:1px solid #dedede;	
 	background: #efefef;
@@ -44,7 +54,7 @@ body{
 div#wrapper
 {
 	margin: 0 auto;
-	width: 600px;
+	width: 1024px;
 }
 
 div#wrapper input[type="submit"] 
@@ -112,6 +122,7 @@ div#wrapper .center-div{
 	
 	margin: 0 auto;
 	width: auto;
+	padding-left: 9%;
 	
 }
 .inputDiv{
@@ -123,7 +134,8 @@ div#wrapper .center-div{
 
 #guessChars .chars{
 	max-width: 133px;
-	font-size: 1.5em;	
+	font-size: 1.5em;
+	text-transform: uppercase;	
 }
 .hangman {
 	float: left;

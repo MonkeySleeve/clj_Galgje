@@ -50,13 +50,6 @@
 	(clojure.string/split (get-word) #"")
 )
 
-(defn inc-total-guesses [old-state]
-	(update-in old-state [:total-guesses] inc)
-)
-
-(defn new-word [word old-state]
-	(update-in old-state [:word] word)
-)
 
 (defn add-char-guessed [char-guessed]
   (if-not(= char-guessed "")
@@ -69,15 +62,15 @@
 (defn draw-hangman! []
 	(session/swap!
 		(fn [session-map]
-			(update-in session-map [:game-state] inc-total-guesses)
+			(update-in session-map [:game-state :total-guesses] inc)
 		)
 	)
 )
 
 (defn set-word! [word]
-	(session/swap!
-		(fn [session-map]
-			(update-in session-map [word :game-state] new-word)
+	(session/swap!  
+   (fn [session-map]
+      (assoc-in session-map [:game-state :word] (clojure.string/lower-case word))
 		)
 	)
 )

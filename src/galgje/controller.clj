@@ -27,7 +27,7 @@
 )
 
 (defn word-submit [input-params]
-  (model/set-word! (first(get input-params :word))) 
+  (model/set-word! (get input-params :word)) 
   (view/play-screen)
 )
 
